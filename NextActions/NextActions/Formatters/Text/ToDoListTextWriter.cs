@@ -16,12 +16,17 @@ namespace NextActions.Formatters.Text
             this.writer = writer;
         }
 
+        private void FormatChildTasks(ITaskContainer taskContainer, string indent = "") {
+            foreach (var task in taskContainer.ChildTasks) {
+                writer.WriteLine("{0}{1}", indent, task.Id);
+                FormatChildTasks(task, indent + "  ");
+            }
+        }
+
         public void Format(ToDoList toDoList) {
             writer.WriteLine("To-Do List '{0}'", toDoList.ProjectName);
             writer.WriteLine("Tasks");
-            foreach (var task in toDoList.Tasks.Values) {
-                writer.WriteLine("  {0}", task.Id);
-            }
+            FormatChildTasks(toDoList);
         }
     }
 }

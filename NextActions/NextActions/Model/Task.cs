@@ -5,12 +5,16 @@ using System.Text;
 
 namespace NextActions.Model
 {
-    class Task
+    class Task : ITaskContainer
     {
-        public int Id { get; private set; }
+        public uint Id { get; private set; }
+        public uint ParentId { get; private set; } // 0 means it's a root task
+        public ICollection<Task> ChildTasks { get; private set; }
 
-        public Task(int id) {
+        public Task(uint id, uint parentId, IEnumerable<Task> childTasks) {
             Id = id;
+            ParentId = ParentId;
+            ChildTasks = new List<Task>(childTasks);
         }
     }
 }
