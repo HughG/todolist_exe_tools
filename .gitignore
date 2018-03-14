@@ -23,6 +23,7 @@ hs_err_pid*
 
 # Visual Studio files
 *.suo
+*.user
 
 /*/*/bin
 /*/*/obj
