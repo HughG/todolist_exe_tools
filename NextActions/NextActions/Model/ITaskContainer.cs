@@ -7,6 +7,6 @@ namespace NextActions.Model
 {
     interface ITaskContainer
     {
-        ICollection<Task> ChildTasks { get; }
+        ICollection<Task> Subtasks { get; }
     }
 }

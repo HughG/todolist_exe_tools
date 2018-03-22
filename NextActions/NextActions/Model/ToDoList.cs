@@ -8,11 +8,12 @@ namespace NextActions.Model
     class ToDoList : ITaskContainer
     {
         public string ProjectName { get; private set; }
-        public ICollection<Task> ChildTasks { get; private set; }
+        public ICollection<Task> Subtasks { get; private set; }
+        public 
 
         public ToDoList(string projectName, IEnumerable<Task> rootTasks) {
             ProjectName = projectName;
-            ChildTasks = new List<Task>(rootTasks);
+            Subtasks = new List<Task>(rootTasks);
         }
     }
 }

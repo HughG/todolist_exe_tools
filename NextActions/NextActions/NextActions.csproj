@@ -61,6 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Parsers\Xml\ToDoListXmlParser.cs" />
     <Compile Include="Formatters\Text\ToDoListTextWriter.cs" />
+    <Compile Include="Util\Lazy.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

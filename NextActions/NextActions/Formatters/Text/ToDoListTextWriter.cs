@@ -16,10 +16,21 @@ namespace NextActions.Formatters.Text
             this.writer = writer;
         }
 
+        private void FormatTask(string indent, Task task) {
+            writer.Write("{0}{1}", indent, task.Id);
+            if (task.IsComplete) {
+                writer.Write(" done {0}", task.DoneDate.Value.Date);
+            }
+            if (task.HasOpenSubtasks) {
+                writer.Write(" hasOpenSub");
+            }
+            writer.WriteLine();
+            FormatChildTasks(task, indent + "  ");
+        }
+
         private void FormatChildTasks(ITaskContainer taskContainer, string indent = "") {
-            foreach (var task in taskContainer.ChildTasks) {
-                writer.WriteLine("{0}{1}", indent, task.Id);
-                FormatChildTasks(task, indent + "  ");
+            foreach (var task in taskContainer.Subtasks) {
+                FormatTask(indent, task);
             }
         }
 

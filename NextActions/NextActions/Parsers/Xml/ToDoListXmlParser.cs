@@ -10,13 +10,23 @@ namespace NextActions.Parsers.Xml
 {
     class ToDoListXmlParser
     {
+
+        private Task ParseTask(XElement taskElement)
+        {
+            var builder = new Task.Builder(
+                GetTaskId(taskElement),
+                GetTaskId(taskElement.Parent),
+                ParseChildTasks(taskElement));
+            var doneDateString = (string)taskElement.Attribute("DONEDATESTRING");
+            if (doneDateString != null) {
+                builder.DoneDate = DateTime.Parse(doneDateString);
+            } 
+            return builder.GetTask();
+        }
+
         private IEnumerable<Task> ParseChildTasks(XElement parent) {
-            var parentTaskId = GetTaskId(parent);
             return from t in parent.Elements("TASK")
-                   select new Task(
-                       GetTaskId(t),
-                       parentTaskId,
-                       ParseChildTasks(t));
+                   select ParseTask(t);
         }
 
         private uint GetTaskId(XElement element) {

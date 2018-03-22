@@ -29,6 +29,7 @@ namespace NextActions
             var list = parser.ParseFromFile(toDoListFilename);
             var formatter = new ToDoListTextFormatter(Console.Out);
             formatter.Format(list);
+            Console.WriteLine();
         }
     }
 }
