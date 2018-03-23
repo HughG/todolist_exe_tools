@@ -9,7 +9,6 @@ namespace NextActions.Model
     {
         public string ProjectName { get; private set; }
         public ICollection<Task> Subtasks { get; private set; }
-        public 
 
         public ToDoList(string projectName, IEnumerable<Task> rootTasks) {
             ProjectName = projectName;

@@ -19,10 +19,17 @@ namespace NextActions.Formatters.Text
         private void FormatTask(string indent, Task task) {
             writer.Write("{0}{1}", indent, task.Id);
             if (task.IsComplete) {
-                writer.Write(" done {0}", task.DoneDate.Value.Date);
+                writer.Write(" done");
+            }
+            if (task.IsExplicitlyComplete) {
+                writer.Write(" on {0}", task.DoneDate?.Date);
             }
             if (task.HasOpenSubtasks) {
                 writer.Write(" hasOpenSub");
+            }
+            if (task.HasCompletedAncestorTasks )
+            {
+                writer.Write(" hasCompletedAncestors");
             }
             writer.WriteLine();
             FormatChildTasks(task, indent + "  ");

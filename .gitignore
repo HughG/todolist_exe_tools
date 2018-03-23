@@ -25,5 +25,6 @@ hs_err_pid*
 *.suo
 *.user
 
+/*/.vs
 /*/*/bin
 /*/*/obj
