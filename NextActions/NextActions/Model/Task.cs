@@ -18,6 +18,7 @@ namespace NextActions.Model
         private ISet<uint> dependencyIds = new HashSet<uint>();
         public DateTime? StartDate { get; private set; }
         public DateTime? DoneDate { get; private set; }
+        public byte? Priority { get; private set; }
         public bool IsExplicitlyComplete { get { return DoneDate != null; } }
         public bool IsComplete { get {
                 return IsExplicitlyComplete
@@ -88,6 +89,7 @@ namespace NextActions.Model
 
             public DateTime StartDate { set { task.StartDate = value; } }
             public DateTime DoneDate { set { task.DoneDate = value; } }
+            public byte Priority { set { task.Priority = value; } }
             public void SetDependencyIds(IEnumerable<uint> ids) { task.SetDependencyIds(ids); }
 
             public Task GetTask() { return task; }

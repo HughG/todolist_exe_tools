@@ -28,6 +28,14 @@ namespace NextActions.Parsers.Xml
                 builder.DoneDate = DateTime.Parse(doneDateString);
             }
 
+            var priorityString = (string)taskElement.Attribute("PRIORITY");
+            if (priorityString != null) {
+                var priority = SByte.Parse(priorityString);
+                if (priority >= 0) {
+                    builder.Priority = (byte)priority;
+                }
+            }
+
             var dependencyIds =
                 from d in taskElement.Elements("DEPENDS")
                 select UInt32.Parse(d.Value);
