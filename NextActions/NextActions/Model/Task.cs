@@ -12,6 +12,7 @@ namespace NextActions.Model
         public Task Parent { get { return (Task)parent.Target; } }
         //public uint ParentId { get; private set; } // 0 means it's a root task
         public ICollection<Task> Subtasks { get; private set; }
+        public DateTime? StartDate { get; private set; }
         public DateTime? DoneDate { get; private set; }
         public bool IsExplicitlyComplete { get { return DoneDate != null; } }
         public bool IsComplete { get {
@@ -24,6 +25,8 @@ namespace NextActions.Model
 
         private Lazy<bool> hasCompletedAncestorTasks;
         public bool HasCompletedAncestorTasks { get { return hasCompletedAncestorTasks.Value; } }
+
+        public bool StartsInFuture { get { return StartDate?.Date > DateTime.Today; } }
 
         private Task(
             uint id,
@@ -49,6 +52,7 @@ namespace NextActions.Model
                 task.Subtasks = new List<Task>(buildSubtasks(task));
             }
 
+            public DateTime StartDate { set { task.StartDate = value; } }
             public DateTime DoneDate { set { task.DoneDate = value; } }
 
             public Task GetTask() { return task; }

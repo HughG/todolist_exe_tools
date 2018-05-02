@@ -18,11 +18,17 @@ namespace NextActions.Formatters.Text
 
         private void FormatTask(string indent, Task task) {
             writer.Write("{0}{1}", indent, task.Id);
+            var startDate = task.StartDate?.Date;
+            if (startDate != null) {
+                var passed = startDate.Value < DateTime.Today;
+                var due = startDate.Value == DateTime.Today;
+                writer.Write(" start {0}{1}{2}", passed ? "overdue " : "", due ? "due " : "", startDate.Value.ToShortDateString());
+            }
             if (task.IsComplete) {
                 writer.Write(" done");
             }
             if (task.IsExplicitlyComplete) {
-                writer.Write(" on {0}", task.DoneDate?.Date);
+                writer.Write(" on {0}", task.DoneDate?.Date.ToShortDateString());
             }
             if (task.HasOpenSubtasks) {
                 writer.Write(" hasOpenSub");

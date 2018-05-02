@@ -17,6 +17,11 @@ namespace NextActions.Parsers.Xml
                 parentTask,
                 p => ParseChildTasks(p, taskElement));
 
+            var startDateString = (string)taskElement.Attribute("STARTDATESTRING");
+            if (startDateString != null) {
+                builder.StartDate = DateTime.Parse(startDateString);
+            }
+
             var doneDateString = (string)taskElement.Attribute("DONEDATESTRING");
             if (doneDateString != null) {
                 builder.DoneDate = DateTime.Parse(doneDateString);
