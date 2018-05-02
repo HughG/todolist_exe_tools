@@ -33,9 +33,13 @@ namespace NextActions.Formatters.Text
             if (task.HasOpenSubtasks) {
                 writer.Write(" hasOpenSub");
             }
-            if (task.HasCompletedAncestorTasks )
-            {
+            if (task.HasCompletedAncestorTasks) {
                 writer.Write(" hasCompletedAncestors");
+            }
+            var dependencies = task.DependencyTasks;
+            if (dependencies.Any()) {
+                writer.Write(" dependsOn [{0}]",
+                    String.Join(", ", dependencies.Values.Select(t => String.Format("{0}{1}", t.Id, t.IsComplete ? "" : "!"))));
             }
             writer.WriteLine();
             FormatChildTasks(task, indent + "  ");
